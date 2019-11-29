@@ -1,0 +1,26 @@
+{
+  "name": "devcamper_api",
+  "version": "1.0.0",
+  "description": "Devcamper API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnkitSalian/DevcamperAPI.git"
+  },
+  "keywords": [
+    "Auth",
+    "security",
+    "API",
+    "node.js",
+    "express"
+  ],
+  "author": "Ankit Salian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnkitSalian/DevcamperAPI/issues"
+  },
+  "homepage": "https://github.com/AnkitSalian/DevcamperAPI#readme"
+}

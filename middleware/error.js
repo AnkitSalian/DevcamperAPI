@@ -3,9 +3,9 @@ const errorHandler = (err, req, res, next) => {
     //Log to console
     console.log(err.stack.red);
     
-    res.status(500).json({
+    res.status(err.statuscode || 500).json({
         success: false,
-        error: err.message
+        error: err.message || 'Server Error'
     })
 }
 

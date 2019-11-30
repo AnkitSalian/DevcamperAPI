@@ -14,6 +14,9 @@ connectDB();
 const bootcamps = require('./routes/bootcamp');
 const app = express();
 
+//Body Parser
+app.use(express.json());
+
 if(process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'));
 }

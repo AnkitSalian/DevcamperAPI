@@ -2,6 +2,7 @@ const fs = require('fs');
 const mongoose = require('mongoose');
 const colors = require('colors');
 const dotenv = require('dotenv');
+const nodemailer = require('nodemailer');
 
 //Load env variables
 dotenv.config({path: './config/config.env'});

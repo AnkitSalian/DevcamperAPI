@@ -67,6 +67,44 @@ exports.getMe = asyncHandler(async (req, res, next) => {
     })
 })
 
+
+// @desc     Update user details
+// @route    PUT /api/v1/auth/updatedetails
+// @access   private
+exports.updateDetails = asyncHandler(async (req, res, next) => {
+    const fieldsToUpdate = {
+        name: req.body.name,
+        email: req.body.email
+    };
+    
+    const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
+        new: true,
+        runValidators: true
+    });
+
+    res.status(200).json({
+        success: true,
+        data: user
+    })
+})
+
+// @desc     Update password
+// @route    PUT /api/v1/auth/updatepassword
+// @access   private
+exports.updatePassword = asyncHandler(async (req, res, next) => {
+    const user = await User.findById(req.user.id).select('+password');
+
+    //Check current password
+    if(!(await user.matchPassword(req.body.currentPassword))){
+        return next( new ErrorResponse('Password is incorrect', 401))
+    }
+
+    user.password = req.body.newPassword;
+    await user.save();
+
+    sendTokenResponse(user, 200, res);
+})
+
 // @desc     Forgot password
 // @route    POST /api/v1/auth/forgotpassword
 // @access   public
@@ -108,10 +146,6 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
         return next(new ErrorResponse('Email could not be sent', 500));
     }
 
-    // res.status(200).json({
-    //     success: true,
-    //     data: user
-    // })
 })
 
 // @desc     Reset password

@@ -16,6 +16,7 @@ const advancedResults = require('../middleware/advancedResults');
 
 //Include other resource router
 const courseRouter = require('./courses');
+const reviewRouter = require('./reviews');
 
 const {protect, authorize} = require('../middleware/auth');
 
@@ -23,6 +24,7 @@ router.route('/radius/:zipcode/:distance').get(getBootcampInRadius);
 
 //Re-route into resource routers
 router.use('/:bootcampId/courses', courseRouter);
+router.use('/:bootcampId/reviews', reviewRouter);
 
 router.route('/:id/photo').put(protect, authorize('publisher', 'admin'), bootcampPhotoUpload);
 
